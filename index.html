@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给我最爱的你</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            overflow: hidden;
+        }
+        h1 {
+            color: #d6336c;
+            margin-top: 50px;
+        }
+        p {
+            font-size: 20px;
+        }
+        button {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+        button:hover {
+            background-color: #d6336c;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 20px;
+            animation: fall 4s linear infinite;
+        }
+        @keyframes fall {
+            from { transform: translateY(-10vh); opacity: 1; }
+            to { transform: translateY(100vh); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>给我最爱的你</h1>
+    <p>从遇见你的那一刻起，我的世界便染上了你的颜色。</p>
+    <p>你愿意成为我的唯一吗？</p>
+    <button onclick="alert('我爱你！')">愿意</button>
+
+    <script>
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = "❤";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 4000);
+        }
+        setInterval(createHeart, 300);
+
+        document.addEventListener("click", function(e) {
+            let x = e.pageX;
+            let y = e.pageY;
+            let love = document.createElement("div");
+            love.innerHTML = "💖";
+            love.style.position = "absolute";
+            love.style.left = x + "px";
+            love.style.top = y + "px";
+            love.style.fontSize = "20px";
+            love.style.animation = "fadeOut 1s forwards";
+            document.body.appendChild(love);
+            setTimeout(() => { love.remove(); }, 1000);
+        });
+        
+        let style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeOut {
+                0% { opacity: 1; transform: translateY(0); }
+                100% { opacity: 0; transform: translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
